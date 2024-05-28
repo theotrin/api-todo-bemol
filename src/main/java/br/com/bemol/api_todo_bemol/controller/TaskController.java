@@ -22,6 +22,12 @@ public class TaskController {
 
     @PostMapping
     public Task createTask(@RequestBody Task task) {
+        // Recupera o último ID da tarefa no banco de dados
+        Long lastId = taskRepository.findLastTaskId();
+
+        // Define o novo ID como o último ID + 1
+        task.setId(lastId != null ? lastId + 1 : 1);
+
         return taskRepository.save(task);
     }
 
