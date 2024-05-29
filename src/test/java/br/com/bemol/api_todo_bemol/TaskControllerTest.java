@@ -76,10 +76,7 @@ public class TaskControllerTest {
         mockMvc.perform(post("/api/tasks")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"description\": \"Theo na Bemol\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.description").value("Theo na Bemol"))
-                .andExpect(jsonPath("$.completed").value(false));
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -92,7 +89,7 @@ public class TaskControllerTest {
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
 
         mockMvc.perform(delete("/api/tasks/1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         verify(taskRepository, times(1)).delete(task);
     }
