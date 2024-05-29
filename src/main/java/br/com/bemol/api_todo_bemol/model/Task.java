@@ -34,6 +34,10 @@ public class Task {
         return completed;
     }
 
+    public void changeComplete() {
+      this.completed = !this.completed;
+    };
+
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }

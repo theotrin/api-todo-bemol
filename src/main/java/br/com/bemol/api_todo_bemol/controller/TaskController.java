@@ -47,7 +47,11 @@ public class TaskController {
         Optional<Task> task = taskRepository.findById(id);
         if (task.isPresent()) {
             Task updatedTask = task.get();
-            updatedTask.setCompleted(true);
+            if(updatedTask.isCompleted()){
+            updatedTask.setCompleted(false);
+            }else{
+                updatedTask.setCompleted(true);
+            }
             taskRepository.save(updatedTask);
             return ResponseEntity.ok(updatedTask);
         } else {
